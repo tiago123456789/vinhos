@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt"
-    xmlns="http://www.w3.org/1999/xhtml">
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,8 +9,8 @@
 
 	<title>AlgaWorks</title>
 
-	<link rel="stylesheet" type="text/css" href="assets/layout/stylesheets/vendors.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/layout/stylesheets/algaworks.min.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,7 +26,7 @@
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand  hidden-xs" href="#">
-						<img alt="AlgaWorks" src="assets/layout/images/logo.png" />
+						<img alt="AlgaWorks" th:src="@{/layout/images/logo.png}" />
 					</a>
 
 					<ul class="nav  navbar-nav">
@@ -148,9 +149,9 @@
 		</footer>
 	</div>
 
-	<script src="assets/layout/javascripts/vendors.min.js"></script>
-	<script src="assets/layout/javascripts/algaworks.min.js"></script>
-	<script src="assets/javascripts/vendors/jquery.mask.min.js"></script>
+	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+	<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+	<script th:src="@{/javascripts/vendors/jquery.mask.min.js}"></script>
 
 	<script>
 		jQuery('.js-moeda').mask("#.##0,00", { reverse: true });
