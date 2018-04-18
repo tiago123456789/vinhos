@@ -1,6 +1,10 @@
 package com.tiago.vinhos.vinhos.model;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -12,10 +16,14 @@ public class Vinho {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String nome;
 
+    @NotNull
+    @NumberFormat(pattern = "#,##0.00")
     private BigDecimal valor;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private TipoVinho tipo;
 

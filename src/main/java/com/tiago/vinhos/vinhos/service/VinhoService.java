@@ -14,11 +14,11 @@ public class VinhoService {
     private VinhoRepository vinhoRepository;
 
     public void salvar(Vinho vinho) {
-        if (this.verificarSeExisteVinhoComNome(vinho.getNome())) {
-            throw new NegocioException("Vinho já existe");
-        }
+//        if (this.verificarSeExisteVinhoComNome(vinho.getNome())) {
+//            throw new NegocioException("Vinho já existe");
+//        }
 
-        this.vinhoRepository.save(vinho);
+        this.vinhoRepository.saveAndFlush(vinho);
     }
 
     public Vinho buscarPorId(Long id) {
