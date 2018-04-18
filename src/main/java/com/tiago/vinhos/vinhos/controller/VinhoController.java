@@ -33,7 +33,7 @@ public class VinhoController {
     @PostMapping(value = "/novo")
     public ModelAndView salvar(@Valid Vinho vinho, BindingResult errors, RedirectAttributes attributes) {
         if (errors.hasErrors()) {
-            this.novo(vinho);
+            return this.novo(vinho);
         }
 
         this.vinhoService.salvar(vinho);
