@@ -14,10 +14,6 @@ public class VinhoService {
     private VinhoRepository vinhoRepository;
 
     public void salvar(Vinho vinho) {
-//        if (this.verificarSeExisteVinhoComNome(vinho.getNome())) {
-//            throw new NegocioException("Vinho já existe");
-//        }
-
         this.vinhoRepository.saveAndFlush(vinho);
     }
 
@@ -29,7 +25,4 @@ public class VinhoService {
         return TipoVinho.values();
     }
 
-    private boolean verificarSeExisteVinhoComNome(String nome) {
-        return this.vinhoRepository.findByNome(nome) != null;
-    }
 }

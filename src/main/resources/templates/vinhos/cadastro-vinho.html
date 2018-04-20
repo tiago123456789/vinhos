@@ -89,16 +89,18 @@
 			</div>
 
 			<div class="container-fluid">
-				<div class="alert  alert-success">
-					<i class="fa fa-check-circle"></i>
 
-					<span>Mensagem sucesso!</span>
-				</div>
 
 				<form th:object="${vinho}"
 					  method="POST"
 					  th:action="@{/vinhos/novo}"
 					  class="form-vertical js-form-loading">
+
+					<div class="alert  alert-success" th:if="${message}">
+						<i class="fa fa-check-circle"></i>
+
+						<span th:text="${message}"></span>
+					</div>
 
 					<div class="alert  alert-danger  alert-dismissible"
 						 role="alert" th:if="${#fields.hasAnyErrors()}">
