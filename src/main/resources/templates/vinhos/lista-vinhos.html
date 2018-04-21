@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt"
-    xmlns="http://www.w3.org/1999/xhtml">
+    xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+>
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,9 +10,9 @@
 
 	<title>AlgaWorks</title>
 
-	<link rel="stylesheet" type="text/css" href="assets/layout/stylesheets/vendors.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/layout/stylesheets/algaworks.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/stylesheets/lista-vinhos.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-vinhos.css}" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,13 +49,13 @@
 					<ul class="aw-menu__list">
 
 						<li class="aw-menu__item">
-							<a href="cadastro-vinho.html">
+							<a th:href="@{/vinhos/novo}">
 								<i class="fa  fa-fw  fa-plus-square"></i>
 
 								<span>Cadastro vinho</span>
 							</a>
 
-							<a href="lista-vinhos.html">
+							<a th:href="@{/vinhos}">
 								<i class="fa  fa-fw  fa-table"></i>
 
 								<span>Lista vinhos</span>
@@ -77,7 +79,7 @@
 
 						<div class="col-xs-4">
 							<div class="aw-page-header-controls">
-								<a class="btn btn-primary" href="cadastro-vinho.html">
+								<a class="btn btn-primary" th:href="@{/vinhos/novo}">
 									<i class="fa fa-plus-square"></i>
 
 									<span class="hidden-xs hidden-sm">Cadastro vinho</span>
@@ -89,10 +91,10 @@
 			</div>
 
 			<div class="container-fluid">
-				<div class="alert  alert-success">
+				<div th:if="${message}" class="alert  alert-success">
 					<i class="fa fa-check-circle"></i>
 					
-					<span>Mensagem sucesso!</span>
+					<span th:text="${message}">Mensagem sucesso!</span>
 				</div>
 
 				<div class="table-responsive">
@@ -107,19 +109,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-center">1</td>
+							<tr th:each="vinho : ${vinhos}">
+								<td class="text-center" th:text="${vinho.id}">1</td>
 
 								<td>
-									<a href="javascript:;">Vinho Azul</a>
+									<a th:href="@{/vinhos/{id}/editar(id=${vinho.id})}" th:text="${vinho.nome}">Vinho Azul</a>
 								</td>
 
 								<td>Tinto</td>
 
-								<td class="text-right">55,00</td>
+								<td class="text-right" th:text="|R$${{vinho.valor}}|">55,00</td>
 
 								<td class="text-center">
-									<form method="POST" onsubmit="return confirm('Posso remover?');">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${vinho.nome} + '?\');'"
+									th:action="@{/vinhos/{id}(id=${vinho.id})}">
+										<input type="hidden" name="_method" value="DELETE" >
 										<button type="submit" class="btn btn-danger btn-xs">
 											<span class="fa fa-trash"></span>
 										</button>
@@ -128,7 +132,7 @@
 							</tr>
 
 							<tr>
-								<td colspan="5">Nenhum vinho cadastrado</td>
+								<td colspan="5" th:if="${vinhos.empty}">Nenhum vinho cadastrado</td>
 							</tr>
 						</tbody>
 					</table>
@@ -138,12 +142,12 @@
 
 		<footer class="aw-layout-footer  js-content">
 			<div class="container-fluid">
-				<span class="aw-footer-disclaimer">&copy; 2017 AlgaWorks. Todos os direitos reservados.</span>
+				<span class="aw-footer-disclaimer">Desenvolvido por Tiago Rosa da costa.</span>
 			</div>
 		</footer>
 	</div>
 
-	<script src="assets/layout/javascripts/vendors.min.js"></script>
-	<script src="assets/layout/javascripts/algaworks.min.js"></script>
+	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+	<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
 </body>
 </html>
